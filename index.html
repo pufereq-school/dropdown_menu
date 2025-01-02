@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        function checkWidth(){
+            if($(window).width() > 768){
+                $('#menu').show();
+                $('#hamburger').hide();
+            } else {
+                $('#menu').hide();
+                $('#hamburger').show();
+            }
+        }
+        $(document).ready(function(){
+            checkWidth();
+
+            // hide all submenus at the beginning
+            $('#menu ul').hide();
+
+            $('#hamburger').click(function(){
+                $('#menu').toggle();
+            });
+            $('#menu li').hover(function(){
+                $(this).children('ul').show();
+            }, function(){
+               $(this).children('ul').hide();
+            });
+
+            $('a').click(function(){
+				$('#content').html($(this).text());
+            });
+        });
+
+        $(window).resize(function(){
+            checkWidth();
+        });
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #2e3440;
+        }
+        #wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+	#content {
+	    color: white;
+	    padding: 1em;
+		text-align: center;
+	}
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        nav {
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        #menu {
+            background-color: #555;
+            display: flex;
+            gap: 1em;
+            /* display: none; */
+            list-style-type: none;
+            padding: 0;
+        }
+        ul {
+            border: 1px solid #2e3440;
+        }
+        #menu li {
+            display: block;
+            padding: 1em;
+        }
+        #menu li ul {
+            display: flex;
+            gap: 1em;
+
+            position: absolute;
+            margin-top: 1em;
+            left: 1em;
+            background-color: #666;
+            /* padding: 10px; */
+        }
+        #menu li:hover {
+            background-color: #8fbcbb;
+        }
+        #menu a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+		    <h2>Strona Dropdown Menu (js)</h2>
+		</header>
+        <nav>
+            <button type="button" id="hamburger">=</button>
+            <ul id="menu">
+                <li><a href="#">Oferta</a>
+                    <ul>
+                        <li><a href="#">Światłowód 5Gb/s</a>
+                            <ul>
+                                <li><a href="#">Pakiet 1</a></li>
+                                <li><a href="#">Pakiet 2</a>
+                                    <ul>
+                                        <li><a href="#">Pakiet 2.1</a></li>
+                                        <li><a href="#">Pakiet 2.2</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Pakiet 3</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Internet radiowy 40Mb/s</a></li>
+                        <li><a href="#">Promocje</a></li>
+                    </ul>
+                </li>
+                <li><a href="#de">O nas</a></li>
+            </ul>
+        </nav>
+        <div id="content"></div>
+    </div>
+</body>
+</html>
